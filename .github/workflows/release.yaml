@@ -34,7 +34,12 @@ jobs:
           cache: pnpm
 
       - name: Upgrade npm (trusted publishing requires >= 11.5.1)
-        run: npm install -g npm@latest
+        run: |
+          NPM_DIR="$HOME/.npm-latest"
+          npm install --prefix "$NPM_DIR" npm@latest
+          echo "$NPM_DIR/node_modules/.bin" >> "$GITHUB_PATH"
+      - name: Verify npm version
+        run: npm --version
 
       - name: Install Dependencies
         run: pnpm install
