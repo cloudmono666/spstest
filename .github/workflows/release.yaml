@@ -48,6 +48,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Debug — direct npm publish (spstest-1) with verbose logging
+        working-directory: packages/spstest-1
+        run: npm publish --access public --loglevel=verbose
+        continue-on-error: true
+
       - name: Create Release PR or Publish
         uses: changesets/action@v1
         with:
