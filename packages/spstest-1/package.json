@@ -2,6 +2,11 @@
   "name": "spstest-1",
   "version": "0.0.2",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudmono666/spstest.git",
+    "directory": "packages/spstest-1"
+  },
   "publishConfig": {
     "access": "public"
   }
