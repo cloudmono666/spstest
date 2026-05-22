@@ -39,7 +39,11 @@ jobs:
           npm install --prefix "$NPM_DIR" npm@latest
           echo "$NPM_DIR/node_modules/.bin" >> "$GITHUB_PATH"
       - name: Verify npm version
-        run: npm --version
+        run: |
+          which npm
+          npm --version
+          echo "OIDC URL set:   ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
+          echo "OIDC TOKEN set: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+yes}"
 
       - name: Install Dependencies
         run: pnpm install
