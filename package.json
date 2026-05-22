@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "changeset:version": "changeset version && pnpm install --lockfile-only"
+    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:publish": "changeset publish && git push --follow-tags"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.8",
