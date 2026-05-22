@@ -1,0 +1,8 @@
+{
+  "name": "spstest-1",
+  "version": "0.0.1",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  }
+}
