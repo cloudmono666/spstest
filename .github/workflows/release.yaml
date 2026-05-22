@@ -30,37 +30,11 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
-
-      - name: Upgrade npm (trusted publishing requires >= 11.5.1)
-        run: |
-          NPM_DIR="$HOME/.npm-latest"
-          npm install --prefix "$NPM_DIR" npm@latest
-          echo "$NPM_DIR/node_modules/.bin" >> "$GITHUB_PATH"
-      - name: Verify npm version
-        run: |
-          which npm
-          npm --version
-          echo "OIDC URL set:   ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
-          echo "OIDC TOKEN set: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+yes}"
 
       - name: Install Dependencies
         run: pnpm install
-
-      - name: Debug npm config
-        run: |
-          echo "=== npm-related env vars ==="
-          env | grep -iE '^(npm|node_auth|actions_id_token)' || true
-          echo ""
-          echo "=== ~/.npmrc ==="
-          cat ~/.npmrc 2>/dev/null || echo "(none)"
-          echo ""
-          echo "=== ./.npmrc ==="
-          cat .npmrc 2>/dev/null || echo "(none)"
-          echo ""
-          echo "=== npm config list -l (truncated) ==="
-          npm config list -l 2>&1 | head -40
 
       - name: Create Release PR or Publish
         uses: changesets/action@v1
@@ -71,4 +45,3 @@ jobs:
           publish: pnpm changeset:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_LOGLEVEL: verbose
